@@ -5,8 +5,8 @@
             
             $('a[href^="' + encodeURI('/wk/Запись:') + '"]', '#bodyContent').after(function () {
                 var a = $('<!--added-edit-link-->&nbsp;<a>');
-                a.html('<sup>[edit]</sup>');
                 a.attr('href', $(this).attr('href') + '?action=edit');
+                a.html('<sup>[edit]</sup>');
                 return a;
             });
         });
