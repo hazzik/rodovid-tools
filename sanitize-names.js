@@ -69,6 +69,8 @@
         };
     
         $(function () {
+            $('html').addClass('sanitize-names-user-js');
+            
             $('a[href^="/wk/%D0%A0%D0%BE%D0%B4:"]').filter(function(i, e) {
                 return $(e).text().match(/(ов$)|(ев$)|(ин$)|(ова$)|(ева$)|(ина$)|(ой$)|(ий$)|(ая$)|(вич$)/);
             }).css({
