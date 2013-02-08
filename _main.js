@@ -47,5 +47,5 @@
      * так и внешних) в отдельный файл, чтобы не мусорить тут:
      */
     
-    importUserScript('User:AntonioK/scripts.js');
+    //importUserScript('User:AntonioK/scripts.js');
     //</source>
