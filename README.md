@@ -1,4 +1,6 @@
 rodovid-stuff
 =============
 
-Stuff for rodovid.org wiki project
+Stuff for http://rodovid.org/ wiki project.
+
+My profile is http://ru.rodovid.org/wk/User:AntonioK
