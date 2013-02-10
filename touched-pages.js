@@ -41,7 +41,10 @@
                                 if (data.query)
                                 {
                                     parseData(data.query.usercontribs, links);
+    
                                     loadAdditionalDataIfNeeded(data, links);
+    
+                                    $('div#content').prepend('Показано '+ $('a', 'div#content').length +' затронутых страниц.<br /><br />');
                                 }
                             },
                             'json'
