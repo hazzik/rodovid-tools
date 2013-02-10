@@ -138,7 +138,7 @@
                 if (clanValue != clan.val()) {
                     clan.val(clanValue);
                     clan.css({'background-color': 'aqua'});
-                    appendSummary('род во множественном числе');
+                    appendSummary('род в именительном падеже множественного числа');
                 }
             }
     
