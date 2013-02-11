@@ -27,8 +27,12 @@
         function parseData(data) {
             $(data).each(function () {
                 if (links.indexOf(this.title)==-1) {
-                    var a = $('<a>').attr('href', '/wk/' + this.title).attr('target', '_blank').html(this.title);
-                    $('div#content ul').append(a).wrap('<li>');
+                    $('<a>')
+                        .attr('href', '/wk/' + this.title)
+                        .attr('target', '_blank')
+                        .html(this.title)
+                        .appendTo('div#content ul')
+                        .wrap('<li>');
                     links.push(this.title);
                 }
             });
