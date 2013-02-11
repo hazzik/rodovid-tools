@@ -2,7 +2,6 @@
     (function ($, window) {
         var links = [];
         function init() {
-            $('#p-cactions').hide();
             $('#content .firstHeading').text('Затронутые страницы');
             $('#bodyContent').html('<p>Показано <span class="counter">0</span> затронутых страниц.</p><ul></ul>');
     
