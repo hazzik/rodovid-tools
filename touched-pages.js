@@ -52,12 +52,16 @@
         
         $(function () {
             $('html').addClass('touched-pages-user-js');
+            
+            if (window.location.hash === '#touched-pages') {
+                showData();
+            }
 
-            var link = $('<a>')
-                .attr('href', '#')
+            $('<a>')
+                .attr('href', 'User:' + wgUserName + '/#touched-pages')
                 .html('Затронутые&nbsp;страницы')
                 .insertAfter('li#pt-mycontris')
-                .wrap('<li id="touched-pages"></li>')
-                .click(showData);
+                .wrap('<li id="touched-pages"></li>');
         });
     })(jQuery, window);
+    //</source>
