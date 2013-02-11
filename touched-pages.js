@@ -3,7 +3,7 @@
         var links = [];
         function init() {
             $('#content .firstHeading').text('Затронутые страницы');
-            $('#bodyContent').html('<p>Показано <span class="counter">0</span> затронутых страниц.</p><ul></ul>');
+            $('#bodyContent').html('<p>Показано <span class="counter">0</span> затронутых страниц.</p><ul></ul><a href="#" class="more">Загрузить еще</a>');
     
             $.get('/api.php', {
                 format: 'json',
@@ -20,7 +20,23 @@
             if (data.query) {
                 parseData(data.query.usercontribs);
                 $('div#content .counter').text(links.length);
-                loadAdditionalDataIfNeeded(data);
+                
+                if(data['query-continue'] && data['query-continue']['usercontribs']['ucstart'] > 1) {
+                    var start = data['query-continue']['usercontribs']['ucstart'];
+                    $('#content .more').unbind('click').bind('click', function() {
+                        $.get('/api.php', {
+                            format: 'json',
+                            action: 'query',
+                            list: 'usercontribs',
+                            uclimit: 500,
+                            ucdir: 'newer',
+                            ucuser: wgUserName,
+                            ucstart: start
+                        }, handleData, 'json');    
+                    });    
+                } else {
+                    $('#content .more').hide();
+                }
             }
         }
         
@@ -35,37 +51,6 @@
                         .get();                    
                 }
             }).appendTo('#content ul').wrap('<li>');
-        }
-        
-        function loadAdditionalDataIfNeeded(data) {
-            if(data['query-continue'] && data['query-continue']['usercontribs']['ucstart'] > 1) {
-                if (confirm('Показаны не все результаты. Добрать недостающие?')) {
-                    $.get('/api.php', {
-                        format: 'json',
-                        action: 'query',
-                        list: 'usercontribs',
-                        uclimit: 500,
-                        ucdir: 'newer',
-                        ucuser: wgUserName,
-                        ucstart: data['query-continue']['usercontribs']['ucstart']
-                    }, handleData, 'json');
-                } else {
-                    var a = $('#content a.more');
-                    if (!a.length) {
-                        a = $('<a>')
-                            .addClass('more')
-                            .attr('href', '#')
-                            .text('Загрузить больше')
-                            .appendTo('#content');
-                    }
-                    a.unbind('click')
-                        .click(function () {
-                            loadAdditionalDataIfNeeded(data);    
-                        });
-                }
-            } else {
-                $('#content a.more').hide();    
-            }
         }
         
         $(function () {
