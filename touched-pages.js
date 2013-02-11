@@ -32,7 +32,8 @@
                             ucdir: 'newer',
                             ucuser: wgUserName,
                             ucstart: start
-                        }, handleData, 'json');    
+                        }, handleData, 'json'); 
+                        return false;
                     });    
                 } else {
                     $('#content .more').hide();
