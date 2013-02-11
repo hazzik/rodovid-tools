@@ -6,18 +6,21 @@
             $('div#content').html('');
             $.get('/api.php', {
                 format: 'json',
-                list: 'usercontribs',
                 action: 'query',
+                list: 'usercontribs',
                 uclimit: 500,
                 ucdir: 'newer',
                 ucuser: wgUserName
-            }, function (data) {
-                if(data.query) {
-                    parseData(data.query.usercontribs, links);
-                    loadAdditionalDataIfNeeded(data, links);
-                }
-            }, 'json');
+            }, handleData, 'json');
             return false;
+        }
+        
+        function handleData(data) {
+            if(data.query) {
+                parseData(data.query.usercontribs, links);
+                loadAdditionalDataIfNeeded(data, links);
+                $('div#content').prepend('Показано ' + $('a', 'div#content').length + ' затронутых страниц.<br /><br />');
+            }
         }
         
     	function parseData(data, links) {
@@ -34,19 +37,13 @@
         	if(data['query-continue'] && data['query-continue']['usercontribs']['ucstart'] > 1 && confirm('Показаны не все результаты. Добрать недостающие?')) {
         	    $.get('/api.php', {
         	        format: 'json',
+                    action: 'query',
         	        list: 'usercontribs',
-        	        action: 'query',
         	        uclimit: 500,
         	        ucdir: 'newer',
         	        ucuser: wgUserName,
         	        ucstart: data['query-continue']['usercontribs']['ucstart']
-        	    }, function (data) {
-        	        if(data.query) {
-        	            parseData(data.query.usercontribs, links);
-        	            loadAdditionalDataIfNeeded(data, links);
-        	            $('div#content').prepend('Показано ' + $('a', 'div#content').length + ' затронутых страниц.<br /><br />');
-        	        }
-        	    }, 'json');
+        	    }, handleData, 'json');
         	}
     	}
         
