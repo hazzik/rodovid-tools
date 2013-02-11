@@ -54,7 +54,7 @@
                     if (!a.length) {
                         a = $('<a>')
                             .addClass('more')
-                            .href('#')
+                            .attr('href', '#')
                             .text('Загрузить больше');
                     }
                     a.unbind('click')
