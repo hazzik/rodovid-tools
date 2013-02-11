@@ -3,7 +3,7 @@
         var links = [];
     	function showData () {
             $('#p-cactions').hide();
-            $('div#content').html('<p>Показано <span class=".counter">0</span> затронутых страниц.</p>');
+            $('div#content').html('<p>Показано <span class="counter">0</span> затронутых страниц.</p>');
 
             $.get('/api.php', {
                 format: 'json',
