@@ -1,9 +1,10 @@
     //<source lang="javascript">
     (function ($, window) {
+        var links = [];
     	function showData () {
-            var links = [];
             $('#p-cactions').hide();
-            $('div#content').html('');
+            $('div#content').html('<p>Показано <span class=".counter">0</span> затронутых страниц.</p>');
+
             $.get('/api.php', {
                 format: 'json',
                 action: 'query',
@@ -16,14 +17,14 @@
         }
         
         function handleData(data) {
-            if(data.query) {
-                parseData(data.query.usercontribs, links);
-                loadAdditionalDataIfNeeded(data, links);
-                $('div#content').prepend('Показано ' + $('a', 'div#content').length + ' затронутых страниц.<br /><br />');
+            if (data.query) {
+                parseData(data.query.usercontribs);
+                loadAdditionalDataIfNeeded(data);
+                $('div#content .counter').text(links.length);
             }
         }
         
-    	function parseData(data, links) {
+    	function parseData(data) {
     		$(data).each(function () {
         		if(!links[this.title]) {
             		var a = $('<a>').attr('href', '/wk/' + this.title).attr('target', '_blank').html(this.title);
@@ -33,7 +34,7 @@
     		});
     	}
 		
-    	function loadAdditionalDataIfNeeded(data, links) {
+    	function loadAdditionalDataIfNeeded(data) {
         	if(data['query-continue'] && data['query-continue']['usercontribs']['ucstart'] > 1 && confirm('Показаны не все результаты. Добрать недостающие?')) {
         	    $.get('/api.php', {
         	        format: 'json',
