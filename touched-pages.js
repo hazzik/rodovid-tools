@@ -32,7 +32,7 @@
                         .attr('href', '/wk/' + this.title)
                         .attr('target', '_blank')
                         .html(this.title)
-                        .wrap('<li>');                    
+                        .wrap('<li>').get();                    
                 }
             }));
         }
