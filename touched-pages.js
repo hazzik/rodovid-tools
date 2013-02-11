@@ -1,9 +1,10 @@
     //<source lang="javascript">
     (function ($, window) {
         var links = [];
-        function showData () {
+        function init() {
             $('#p-cactions').hide();
-            $('div#content').html('<p>Показано <span class="counter">0</span> затронутых страниц.</p><ul></ul>');
+            $('#content .firstHeading').text('Затронутые страницы');
+            $('#bodyContent').html('<p>Показано <span class="counter">0</span> затронутых страниц.</p><ul></ul>');
     
             $.get('/api.php', {
                 format: 'json',
@@ -56,7 +57,7 @@
             $('html').addClass('touched-pages-user-js');
             
             if (window.location.hash === '#touched-pages') {
-                showData();
+                init();
             }
     
             $('<a>')
