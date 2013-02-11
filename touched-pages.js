@@ -53,7 +53,7 @@
                     var a = $('#content a.more');
                     if (!a.length) {
                         a = $('<a>')
-                            .class('more')
+                            .addClass('more')
                             .href('#')
                             .text('Загрузить больше');
                     }
