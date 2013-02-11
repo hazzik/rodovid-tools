@@ -58,7 +58,7 @@
             }
 
             $('<a>')
-                .attr('href', 'User:' + wgUserName + '/#touched-pages')
+                .attr('href', '/wk/User:' + wgUserName + '/#touched-pages')
                 .html('Затронутые&nbsp;страницы')
                 .insertAfter('li#pt-mycontris')
                 .wrap('<li id="touched-pages"></li>');
