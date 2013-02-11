@@ -38,16 +38,32 @@
         }
         
         function loadAdditionalDataIfNeeded(data) {
-            if(data['query-continue'] && data['query-continue']['usercontribs']['ucstart'] > 1 && confirm('Показаны не все результаты. Добрать недостающие?')) {
-                $.get('/api.php', {
-                    format: 'json',
-                    action: 'query',
-                    list: 'usercontribs',
-                    uclimit: 500,
-                    ucdir: 'newer',
-                    ucuser: wgUserName,
-                    ucstart: data['query-continue']['usercontribs']['ucstart']
-                }, handleData, 'json');
+            if(data['query-continue'] && data['query-continue']['usercontribs']['ucstart'] > 1) {
+                if (confirm('Показаны не все результаты. Добрать недостающие?')) {
+                    $.get('/api.php', {
+                        format: 'json',
+                        action: 'query',
+                        list: 'usercontribs',
+                        uclimit: 500,
+                        ucdir: 'newer',
+                        ucuser: wgUserName,
+                        ucstart: data['query-continue']['usercontribs']['ucstart']
+                    }, handleData, 'json');
+                } else {
+                    var a = $('#content a.more');
+                    if (!a.length) {
+                        a = $('<a>')
+                            .class('more')
+                            .href('#')
+                            .text('Загрузить больше');
+                    }
+                    a.unbind('click')
+                        .click(function () {
+                            loadAdditionalDataIfNeeded(data);    
+                        });
+                }
+            } else {
+                $('#content a.more').hide();    
             }
         }
         
