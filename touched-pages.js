@@ -25,16 +25,16 @@
         }
         
         function parseData(data) {
-            $('div#content ul').append($(data).map(function () {
+            $(data).map(function () {
                 if (links.indexOf(this.title)==-1) {
                     links.push(this.title);
                     return $('<a>')
                         .attr('href', '/wk/' + this.title)
                         .attr('target', '_blank')
                         .html(this.title)
-                        .wrap('<li>').get();                    
+                        .get();                    
                 }
-            }));
+            }).appendTo('#content ul').wrap('<li>');
         }
         
         function loadAdditionalDataIfNeeded(data) {
