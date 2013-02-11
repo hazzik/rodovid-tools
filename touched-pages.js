@@ -3,7 +3,7 @@
         var links = [];
         function showData () {
             $('#p-cactions').hide();
-            $('div#content').html('<p>Показано <span class="counter">0</span> затронутых страниц.</p>');
+            $('div#content').html('<p>Показано <span class="counter">0</span> затронутых страниц.</p><ul></ul>');
     
             $.get('/api.php', {
                 format: 'json',
@@ -26,10 +26,10 @@
         
         function parseData(data) {
             $(data).each(function () {
-                if(links.indexOf(this.title)==-1) {
+                if (links.indexOf(this.title)==-1) {
                     var a = $('<a>').attr('href', '/wk/' + this.title).attr('target', '_blank').html(this.title);
-                    $('div#content').append(a).append('<br />');
-                        links.push(this.title);
+                    $('div#content ul').append(a).wrap('<li>');
+                    links.push(this.title);
                 }
             });
         }
