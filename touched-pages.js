@@ -55,7 +55,8 @@
                         a = $('<a>')
                             .addClass('more')
                             .attr('href', '#')
-                            .text('Загрузить больше');
+                            .text('Загрузить больше')
+                            .appendTo('#content');
                     }
                     a.unbind('click')
                         .click(function () {
@@ -77,7 +78,7 @@
             $('<a>')
                 .attr('href', '/wk/User:' + wgUserName + '/#touched-pages')
                 .html('Затронутые&nbsp;страницы')
-                .insertAfter('li#pt-mycontris')
+                .insertAfter('#pt-mycontris')
                 .wrap('<li id="touched-pages"></li>');
         });
     })(jQuery, window);
