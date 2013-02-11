@@ -25,17 +25,16 @@
         }
         
         function parseData(data) {
-            $(data).each(function () {
+            $('div#content ul').append($(data).map(function () {
                 if (links.indexOf(this.title)==-1) {
-                    $('<a>')
+                    links.push(this.title);
+                    return $('<a>')
                         .attr('href', '/wk/' + this.title)
                         .attr('target', '_blank')
                         .html(this.title)
-                        .appendTo('div#content ul')
-                        .wrap('<li>');
-                    links.push(this.title);
+                        .wrap('<li>');                    
                 }
-            });
+            }));
         }
         
         function loadAdditionalDataIfNeeded(data) {
