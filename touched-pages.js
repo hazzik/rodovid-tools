@@ -30,7 +30,7 @@
                     $('<a>')
                         .attr('href', '/wk/' + this.title)
                         .attr('target', '_blank')
-                        .html(this.title + this.comment)
+                        .html(this.title)
                         .appendTo('div#content ul')
                         .wrap('<li>');
                     links.push(this.title);
