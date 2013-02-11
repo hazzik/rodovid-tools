@@ -26,10 +26,10 @@
         
     	function parseData(data) {
     		$(data).each(function () {
-        		if(!links[this.title]) {
+        		if(links.indexOf(this.title)==-1) {
             		var a = $('<a>').attr('href', '/wk/' + this.title).attr('target', '_blank').html(this.title);
             		$('div#content').append(a).append('<br />');
-            			links[this.title] = true;
+            			links.push(this.title);
         		}
     		});
     	}
